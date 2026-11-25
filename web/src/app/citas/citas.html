@@ -1,0 +1,118 @@
+<header>
+  <div class="barra container d-flex flex-column flex-sm-row justify-content-between align-items-center gap-3">
+    <a class="marca d-flex align-items-center gap-3 text-decoration-none" href="/">
+      <img src="../img/logo.webp" alt="Logo Aura Stetic Spa">
+      <span class="marca-nombre">Aura Stetic Spa</span>
+    </a>
+
+    <nav class="nav-acciones d-flex flex-wrap justify-content-center gap-2"
+         aria-label="Navegación de citas">
+      <a class="btn btn-nueva d-inline-flex align-items-center gap-2" href="/reservar">
+        <span aria-hidden="true">+</span> Nueva cita
+      </a>
+      <a class="btn btn-catalogo d-inline-flex align-items-center gap-2" href="/">
+        <span aria-hidden="true"></span> Volver al catálogo
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main class="container flex-grow-1 py-4 pb-5">
+  <div class="cabecera d-flex justify-content-between align-items-end flex-wrap gap-3 mb-4">
+    <div>
+      <h1>Citas registradas</h1>
+      <p class="mb-0" role="status" aria-live="polite">{{ contador() }}</p>
+      @if (mensaje()) {
+        <p class="text-danger" role="alert">{{ mensaje() }}</p>
+      }
+    </div>
+
+    <div>
+      <label class="form-label mb-1" for="filtro">Filtrar por estado</label>
+      <select
+        class="form-select"
+        id="filtro"
+        [value]="filtro()"
+        (change)="cambiarFiltro($event)"
+      >
+        <option value="">Todas</option>
+        <option value="pendiente">Pendientes</option>
+        <option value="confirmada">Confirmadas</option>
+        <option value="atendida">Atendidas</option>
+        <option value="cancelada">Canceladas</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="tabla card border-0 shadow-sm">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0 appointments-table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Tratamiento</th>
+            <th scope="col">Fecha / hora</th>
+            <th scope="col">Nota</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (cita of citasFiltradas(); track cita.id) {
+            <tr>
+              <td>{{ cita.id }}</td>
+              <td>
+                {{ cita.nombre }}
+                @if (cita.telefono) {
+                  <small class="d-block">{{ cita.telefono }}</small>
+                }
+              </td>
+              <td>{{ cita.servicio }}</td>
+              <td>
+                {{ cita.fecha || '—' }}
+                @if (cita.hora) {
+                  <small class="d-block">{{ cita.hora }}</small>
+                }
+              </td>
+              <td>{{ cita.notas || '—' }}</td>
+              <td>
+                <select
+                  class="form-select form-select-sm"
+                  [value]="cita.estado || 'pendiente'"
+                  (change)="cambiarEstado(cita, $any($event.target).value)"
+                  [attr.aria-label]="'Estado de la cita ' + cita.id"
+                >
+                  @for (estado of estados; track estado) {
+                    <option [value]="estado">{{ estado }}</option>
+                  }
+                </select>
+              </td>
+              <td>
+                <button
+                  class="btn btn-outline-danger btn-sm"
+                  type="button"
+                  (click)="eliminar(cita)"
+                  [attr.aria-label]="'Eliminar cita de ' + cita.nombre"
+                >
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td class="vacio text-center py-5" colspan="7">
+                @if (citas().length) {
+                  No hay citas con ese estado.
+                } @else {
+                  No hay citas registradas todavía.
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>

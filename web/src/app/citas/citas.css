@@ -1,0 +1,229 @@
+:host {
+  --ink: #17130f;
+  --ink-2: #221c15;
+  --sand: #ece1cd;
+  --paper: #fbf8f3;
+  --paper-2: #f3ead9;
+  --gold: #a77f4c;
+  --gold-light: #cda870;
+  --text-dark: #221c15;
+  --text-soft: #6b5f52;
+  --text-cream: #f4e9d8;
+  --text-cream-soft: #cabfaa;
+  --line: rgba(34, 28, 21, .14);
+  --radius: 12px;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  color: var(--text-dark);
+  background: var(--sand);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: clamp(30px, 4vw, 40px);
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--gold-light);
+  outline-offset: 3px;
+}
+
+/* ---------- Barra superior ---------- */
+header {
+  padding: 18px 20px;
+  background: var(--ink);
+  border-bottom: 3px solid var(--gold);
+}
+
+.marca {
+  color: var(--text-cream);
+}
+
+.marca img {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+}
+
+.marca-nombre {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--text-cream);
+}
+
+.nav-acciones .btn {
+  min-height: 44px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color .2s, border-color .2s, color .2s;
+}
+
+.btn-nueva {
+  border: 1px solid var(--gold-light);
+  background: var(--gold-light);
+  color: var(--ink);
+}
+
+.btn-nueva:hover,
+.btn-nueva:focus {
+  border-color: #dfbd88;
+  background: #dfbd88;
+  color: var(--ink);
+}
+
+.btn-nueva span {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: .8;
+}
+
+.btn-catalogo {
+  border: 1px solid rgba(244, 233, 216, .38);
+  background: transparent;
+  color: var(--text-cream);
+}
+
+.btn-catalogo:hover,
+.btn-catalogo:focus {
+  border-color: var(--gold-light);
+  background: rgba(205, 168, 112, .14);
+  color: var(--text-cream);
+}
+
+@media (max-width: 575.98px) {
+  header { padding: 16px; }
+  .barra { align-items: stretch !important; }
+  .marca { align-self: center; }
+  .nav-acciones { width: 100%; }
+  .nav-acciones .btn {
+    flex: 1 1 auto;
+    justify-content: center;
+    padding-inline: 12px;
+    font-size: 13px;
+  }
+}
+
+/* ---------- Cabecera de la lista ---------- */
+.cabecera {
+  padding-top: 12px;
+}
+
+.cabecera p {
+  color: var(--text-soft);
+  font-size: 15px;
+}
+
+.cabecera .form-label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.cabecera .form-select {
+  min-width: 210px;
+  padding: 11px 40px 11px 16px;
+  font-size: 15px;
+  color: var(--text-dark);
+  background-color: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.cabecera .form-select:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(167, 127, 76, .22);
+}
+
+/* ---------- Tabla ---------- */
+.tabla {
+  overflow: hidden;
+  background: var(--paper);
+  border: 1px solid var(--line) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: none !important;
+}
+
+.appointments-table {
+  min-width: 760px;
+  font-size: 14.5px;
+  --bs-table-bg: var(--paper);
+  --bs-table-color: var(--text-dark);
+  --bs-table-border-color: var(--line);
+  --bs-table-hover-bg: var(--paper-2);
+}
+
+.appointments-table thead th {
+  background: var(--ink);
+  color: var(--text-cream);
+  font-size: 13.5px;
+  font-weight: 500;
+  padding: 14px 16px;
+  border-bottom: 0;
+  white-space: nowrap;
+}
+
+.appointments-table tbody td {
+  padding: 16px;
+  vertical-align: middle;
+}
+
+.appointments-table tbody td:first-child {
+  color: var(--text-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.appointments-table tbody td:nth-child(2) {
+  font-weight: 500;
+}
+
+.appointments-table td small {
+  display: block;
+  color: var(--text-soft);
+  font-size: 13px;
+}
+
+.appointments-table .vacio {
+  color: var(--text-soft);
+  font-style: italic;
+}
+
+/* Estados, etiquetas y acciones que genera citas.js */
+.appointments-table .badge {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.appointments-table .btn {
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.appointments-table .form-select,
+.appointments-table select {
+  border-radius: 8px;
+  border: 1.5px solid var(--line);
+  font-size: 13.5px;
+}
+
+.appointments-table .form-select:focus,
+.appointments-table select:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(167, 127, 76, .22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

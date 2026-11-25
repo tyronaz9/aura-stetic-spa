@@ -1,0 +1,215 @@
+<div class="pagina">
+  <header>
+    <a class="marca" href="/">
+      <img src="../img/logo.webp" alt="Aura Stetic Spa">
+      <span class="marca-texto">
+        <span class="marca-nombre">Aura Stetic Spa</span>
+        <span class="marca-seccion">Reserva tu cita</span>
+      </span>
+    </a>
+
+    <div class="intro">
+      <p class="script">Reserva tu momento</p>
+      <h1>Agenda tu cita</h1>
+      <p>
+        Elige el tratamiento, el día y la hora que mejor te queden.
+        Guardamos tu solicitud y se abre WhatsApp para confirmar contigo.
+      </p>
+    </div>
+
+    <div>
+      <nav class="nav-acciones" aria-label="Navegación de reservas">
+        <a class="btn btn-nueva" href="/citas">Ver citas</a>
+        <a class="btn btn-catalogo" href="/index">
+          <span aria-hidden="true"></span> Volver al catálogo
+        </a>
+      </nav>
+
+      <p class="ubicacion mt-4">
+        Portoviejo, Ciudadela El Maestro, Manabí<br>
+        <a href="https://www.instagram.com/aura_stetic.spa"
+           target="_blank" rel="noopener">
+          @aura_stetic.spa
+        </a>
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <form
+      class="reserva-form card"
+      [formGroup]="formulario"
+      (ngSubmit)="guardar()"
+      novalidate
+    >
+      <div class="row g-3 mb-3">
+        <div class="campo col-md-7">
+          <label class="form-label" for="nombre">Tu nombre</label>
+          <input
+            class="form-control"
+            [class.is-invalid]="formulario.controls.nombre.touched && formulario.controls.nombre.invalid"
+            type="text"
+            id="nombre"
+            formControlName="nombre"
+            autocomplete="name"
+            placeholder="Nombre y apellido"
+            required
+          >
+          @if (formulario.controls.nombre.touched && formulario.controls.nombre.invalid) {
+            <div class="invalid-feedback">
+              Escribe al menos 3 caracteres para tu nombre.
+            </div>
+          }
+        </div>
+
+        <div class="campo col-md-5">
+          <label class="form-label" for="telefono">Tu teléfono</label>
+          <input
+            class="form-control"
+            [class.is-invalid]="formulario.controls.telefono.touched && formulario.controls.telefono.invalid"
+            type="tel"
+            id="telefono"
+            formControlName="telefono"
+            autocomplete="tel"
+            inputmode="numeric"
+            maxlength="10"
+            placeholder="0990000000"
+            required
+          >
+          @if (formulario.controls.telefono.touched && formulario.controls.telefono.invalid) {
+            <div class="invalid-feedback">
+              Escribe un teléfono de 10 dígitos que empiece con 0.
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="campo mb-3">
+        <label class="form-label" for="servicio">Tratamiento que deseas</label>
+        <select
+          class="form-select"
+          [class.is-invalid]="formulario.controls.servicio.touched && formulario.controls.servicio.invalid"
+          id="servicio"
+          formControlName="servicio"
+          required
+        >
+          <option value="">Elige un tratamiento…</option>
+
+          <optgroup label="Faciales">
+            <option value="Limpieza básica">Limpieza básica</option>
+            <option value="Facial hidratante relax">Facial hidratante relax</option>
+            <option value="Facial renueva tu luminosidad">Facial renueva tu luminosidad</option>
+            <option value="Limpieza profunda hidratante">Limpieza profunda hidratante</option>
+            <option value="Limpieza profunda detox">Limpieza profunda detox</option>
+            <option value="Tratamiento anti-acné">Tratamiento anti-acné</option>
+            <option value="Tratamiento despigmentante">Tratamiento despigmentante</option>
+            <option value="Facial corea Glow">Facial corea Glow</option>
+            <option value="Facial Glass skin PDRN">Facial Glass skin PDRN</option>
+            <option value="Facial lifting con radiofrecuencia">Facial lifting con radiofrecuencia</option>
+            <option value="Corrección de textura y cicatrices">Corrección de textura y cicatrices</option>
+            <option value="Facial Glow con ultrasonido">Facial Glow con ultrasonido</option>
+          </optgroup>
+
+          <optgroup label="Corporales">
+            <option value="Masaje relajante cuerpo completo">Masaje relajante cuerpo completo</option>
+            <option value="Masaje relajante · 1 zona localizada">Masaje relajante · 1 zona localizada</option>
+            <option value="Masaje relajante con acupuntura">Masaje relajante con acupuntura</option>
+            <option value="Maderoterapia">Maderoterapia</option>
+            <option value="Drenaje linfático">Drenaje linfático</option>
+            <option value="Limpieza profunda de espalda">Limpieza profunda de espalda</option>
+            <option value="Despigmentación química">Despigmentación química</option>
+            <option value="Drenaje reductor térmico">Drenaje reductor térmico</option>
+            <option value="Moldeo corporal intensivo">Moldeo corporal intensivo</option>
+          </optgroup>
+
+          <optgroup label="Cejas y Pestañas">
+            <option value="Cejas laminadas">Cejas laminadas</option>
+            <option value="Cejas henna">Cejas henna</option>
+            <option value="Laminado / Henna">Laminado / Henna</option>
+            <option value="Micropigmentación efecto polvo">Micropigmentación efecto polvo</option>
+            <option value="Lifting de pestañas">Lifting de pestañas</option>
+            <option value="Lifting efecto rímel">Lifting efecto rímel</option>
+          </optgroup>
+        </select>
+
+        @if (formulario.controls.servicio.touched && formulario.controls.servicio.invalid) {
+          <div class="invalid-feedback">Por favor elige un tratamiento.</div>
+        }
+      </div>
+
+      <div class="fila row g-3 mb-3">
+        <div class="campo col-sm-6">
+          <label class="form-label" for="fecha">Día que prefieres</label>
+          <input
+            class="form-control"
+            [class.is-invalid]="formulario.controls.fecha.touched && formulario.controls.fecha.invalid"
+            type="date"
+            id="fecha"
+            formControlName="fecha"
+            [min]="minFecha"
+            required
+          >
+          @if (formulario.controls.fecha.touched && formulario.controls.fecha.invalid) {
+            <div class="invalid-feedback">Elige hoy o una fecha posterior.</div>
+          }
+        </div>
+
+        <div class="campo col-sm-6">
+          <label class="form-label" for="hora">Hora aproximada</label>
+          <input
+            class="form-control"
+            [class.is-invalid]="formulario.controls.hora.touched && formulario.controls.hora.invalid"
+            type="time"
+            id="hora"
+            formControlName="hora"
+            required
+          >
+          @if (formulario.controls.hora.touched && formulario.controls.hora.invalid) {
+            <div class="invalid-feedback">Por favor elige la hora aproximada.</div>
+          }
+        </div>
+      </div>
+
+      <div class="campo mb-3">
+        <label class="form-label" for="notas">
+          Algo que debamos saber <span class="opc">(opcional)</span>
+        </label>
+        <textarea
+          class="form-control"
+          id="notas"
+          formControlName="notas"
+          maxlength="200"
+          placeholder="Alergias, si es tu primera vez, dudas sobre el tratamiento…"
+        ></textarea>
+      </div>
+
+      <p class="resumen-titulo">Este es el mensaje que enviaremos</p>
+      <div class="resumen alert" aria-live="polite">
+        @if (resumen()) {
+          {{ resumen() }}
+        } @else {
+          <span class="vacio">Completa el formulario y aquí verás el mensaje.</span>
+        }
+      </div>
+
+      <button class="enviar btn btn-success" type="submit" [disabled]="guardando()">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39c1.45.79 3.08 1.21 4.75 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.827 9.827 0 0012.04 2zm5.8 14.05c-.24.68-1.4 1.32-1.94 1.4-.5.08-1.12.11-1.81-.11-.42-.13-.95-.31-1.64-.6-2.88-1.24-4.76-4.15-4.9-4.34-.14-.19-1.17-1.55-1.17-2.96 0-1.41.74-2.1 1-2.39.26-.28.58-.35.77-.35.2 0 .39 0 .56.01.18.01.42-.07.65.5.24.58.81 2 .88 2.15.07.15.12.32.02.51-.1.19-.15.31-.29.48-.15.17-.31.38-.44.51-.15.15-.3.31-.13.6.17.29.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.35 1.46.29.15.46.13.63-.05.17-.18.72-.84.92-1.13.19-.29.38-.24.64-.15.26.1 1.66.78 1.94.92.28.14.47.21.54.33.07.12.07.68-.17 1.36z"/>
+        </svg>
+        {{ guardando() ? 'Guardando…' : 'Enviar por WhatsApp' }}
+      </button>
+
+      <p class="nota" role="status" aria-live="polite" [class.error]="esError()">
+        {{ mensaje() }}
+      </p>
+    </form>
+  </main>
+
+  <footer>
+    Aura Stetic Spa · Portoviejo, Ciudadela El Maestro · Manabí, Ecuador<br>
+    <a href="https://www.instagram.com/aura_stetic.spa"
+       target="_blank" rel="noopener">
+      @aura_stetic.spa
+    </a>
+  </footer>
+</div>
